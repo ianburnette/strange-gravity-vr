@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SporePool : MonoBehaviour {
@@ -9,11 +7,13 @@ public class SporePool : MonoBehaviour {
      [SerializeField] GameObject sporePrefab;
      [SerializeField] int poolSize = 500;
 
-     List<Transform> sporePool = new List<Transform>();
+     List<Spore> sporePool = new List<Spore>();
 
-     void Awake() {
-         if (instance != null)
+     void OnEnable() {
+         if (instance != null) {
              Destroy(gameObject);
+             return;
+         }
          instance = this;
          
          InstantiateSporesIntoPool();
@@ -23,14 +23,15 @@ public class SporePool : MonoBehaviour {
          for (var i = 0; i < poolSize; i++) {
              var spore = Instantiate(sporePrefab, transform);
              spore.SetActive(false);
-             sporePool.Add(spore.transform);
+             sporePool.Add(spore.GetComponent<Spore>());
          }
      }
 
-     public Transform GetSporeFromPool() {
+     public Spore GetSporeFromPool() {
          while (true) {
              for (var i = 0; i < poolSize; i++) {
                  if (!sporePool[i].gameObject.activeSelf) {
+                     sporePool[i].trailRenderer.enabled = false;
                      sporePool[i].gameObject.SetActive(true);
                      return sporePool[i];
                  }
@@ -40,8 +41,8 @@ public class SporePool : MonoBehaviour {
          }
      }
 
-     public void ReturnSporeToPool(Transform sporeToReturn) {
-         sporeToReturn.parent = transform;
+     public void ReturnSporeToPool(Spore sporeToReturn) {
+         sporeToReturn.transform.parent = transform;
          sporeToReturn.gameObject.SetActive(false);
      }
 }

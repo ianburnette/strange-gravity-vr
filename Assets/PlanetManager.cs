@@ -8,9 +8,11 @@ public class PlanetManager : MonoBehaviour {
 
   const float tickTime = 1f;
   
-  void Awake() {
-    if (instance != null)
-      Destroy(gameObject);
+  void OnEnable() {
+    if (instance != null) {
+        Destroy(gameObject);
+        return;
+    }
     instance = this;
 
     InvokeRepeating(nameof(Tick), tickTime, tickTime);
