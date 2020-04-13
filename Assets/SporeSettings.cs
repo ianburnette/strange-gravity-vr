@@ -13,6 +13,9 @@ public class SporeSettings : MonoBehaviour {
 
     public float AttackSpeedInitial = 5f;
     public float AttackSpeedPersistent = 2f;
+    public float CollisionDistance = 1f;
+
+    public float SporeLifetime = 5f;//TODO: set this to trail length
 
     void OnEnable() {
         if (instance != null) {

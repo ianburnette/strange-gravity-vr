@@ -6,10 +6,13 @@ public class PlanetSettings : MonoBehaviour {
     
     [SerializeField] List<Material> planetMaterials;
     [SerializeField] public Dictionary<Allegiance, Material> materialByAllegiance;
+
+    public float materialTransitionTime = 1f;
     
     public enum Allegiance {
         player,
-        enemy1
+        enemy1,
+        unclaimed
     }
 
     void OnEnable() {
@@ -28,6 +31,7 @@ public class PlanetSettings : MonoBehaviour {
         materialByAllegiance = new Dictionary<Allegiance, Material> {
             {Allegiance.player, planetMaterials[index++]},
             {Allegiance.enemy1, planetMaterials[index++]},
+            {Allegiance.unclaimed, planetMaterials[index++]},
         };
     }
 }

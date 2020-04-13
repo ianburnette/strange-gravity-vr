@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3131711848875420320}
   - component: {fileID: 3131711848875420332}
   - component: {fileID: 3131711848875420323}
+  - component: {fileID: 1440500964}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -79,6 +80,10 @@ MonoBehaviour:
   SporeGravity: 18
   SporeOrbitalOffset: 0.5
   OrbitalSpeed: 3
+  AttackSpeedInitial: 5
+  AttackSpeedPersistent: 2
+  CollisionDistance: 1
+  SporeLifetime: 5
 --- !u!114 &3131711848875420323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,3 +99,16 @@ MonoBehaviour:
   planetMaterials:
   - {fileID: 2100000, guid: a2dcbd6cb4aef4f4b8b75085e2e2b776, type: 2}
   - {fileID: 2100000, guid: 0486dc3499e748d469960692164bdbe9, type: 2}
+  - {fileID: 2100000, guid: 992b04f57e97d4445b70abf2ac63b6e7, type: 2}
+--- !u!114 &1440500964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131711848875420327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7d7684a0127ab42b84f945aab7c540, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

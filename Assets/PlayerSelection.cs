@@ -6,18 +6,29 @@ public class PlayerSelection : MonoBehaviour {
     readonly List<PlanetSelection> selectedPlanets = new List<PlanetSelection>();
     
     public void Select(ObjectPointer.EventData transformData) {
-        var planetSelection = transformData.CollisionData.transform.GetComponent<PlanetSelection>();
+        if (transformData == null)
+            return;
+        var planetSelection = transformData.CollisionData.transform?.GetComponent<PlanetSelection>();
+        Debug.Log($"hit {transformData.Transform} with {transformData.CollisionData.transform}");
         if (planetSelection == null) return;
+        if (planetSelection.Allegiance.myAllegiance != PlanetSettings.Allegiance.player) return;
+        
         planetSelection.Select();
-        selectedPlanets.Add(planetSelection);
+        if (!selectedPlanets.Contains(planetSelection)) {
+            selectedPlanets.Add(planetSelection);
+        }
     }
 
     public void Transfer(ObjectPointer.EventData transformData) {
-        var planetSelection = transformData.CollisionData.transform.GetComponent<PlanetSelection>();
+        if (transformData == null)
+            return;
+        var planetSelection = transformData.CollisionData.transform?.GetComponent<PlanetSelection>();
         if (planetSelection == null) return;
         foreach (var selectedPlanet in selectedPlanets) {
-            selectedPlanet.TransferSpores(transformData);
+            selectedPlanet.TransferSpores(planetSelection);
+            selectedPlanet.Deselect();
         }
+        selectedPlanets.Clear();
     }
 
     public void Deselect() {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 320585771}
   - component: {fileID: 5606705035256618044}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CanvasOffset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 328912963}
   - component: {fileID: 328912962}
   - component: {fileID: 328912961}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Count
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2081810152}
   - component: {fileID: 2081810153}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CountCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,6 @@ GameObject:
   - component: {fileID: 2125410354}
   - component: {fileID: 2125410355}
   - component: {fileID: 2125410357}
-  - component: {fileID: 2125410358}
   - component: {fileID: 6268616961700781293}
   m_Layer: 0
   m_Name: Planet
@@ -465,18 +464,6 @@ MonoBehaviour:
   myAllegiance: {fileID: 2125410355}
   planetConfiguration: {fileID: 2125410354}
   countText: {fileID: 328912961}
---- !u!114 &2125410358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2955393158409858140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d9ca668c93e3314e9b8a5f9f51089cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6268616961700781293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +489,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7581449299916335941}
   - component: {fileID: 6649648158171332867}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: SelectionCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +550,7 @@ GameObject:
   - component: {fileID: 2933610927347262671}
   - component: {fileID: 3646658088196219296}
   - component: {fileID: 5056899411244857774}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}

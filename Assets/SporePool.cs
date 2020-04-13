@@ -42,6 +42,8 @@ public class SporePool : MonoBehaviour {
      }
 
      public void ReturnSporeToPool(Spore sporeToReturn) {
+         if (!sporeToReturn)
+             return;
          sporeToReturn.transform.parent = transform;
          sporeToReturn.gameObject.SetActive(false);
      }

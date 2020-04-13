@@ -17,12 +17,14 @@ public class PlanetSelection : MonoBehaviour {
         }
     }
 
+    public PlanetAllegiance Allegiance => planetAllegiance;
+
     public void Select() {
-        if(planetAllegiance.myAllegiance == PlanetSettings.Allegiance.player)
+        if(Allegiance.myAllegiance == PlanetSettings.Allegiance.player)
             IsSelected = true;
     }
 
     public void Deselect() => IsSelected = false;
 
-    public void TransferSpores(TransformData transformData) => sporeManager.TransferSpores(transformData.TryGetGameObject()?.GetComponent<PlanetarySporeManager>());
+    public void TransferSpores(PlanetSelection destination) => sporeManager.TransferSpores(destination.sporeManager);
 }

@@ -22,36 +22,48 @@ public class PlanetarySporeManager : MonoBehaviour {
 
     void Tick() {
         if (mySpores.Count < planetConfiguration.MaxSpores) 
-            AddSpore();
+            BeginGrowingSpore();
     }
 
-    void AddSpore() {
+    void BeginGrowingSpore() {
         var sporeFromPool = SporePool.instance.GetSporeFromPool();
-        sporeFromPool.BeginGrowing(myTransform, myTransform.localScale.x);
-        mySpores.Add(sporeFromPool);
+        StartCoroutine(sporeFromPool.BeginGrowing(myTransform, myTransform.localScale.x, AddSpore));
+    }
+
+    void AddSpore(Spore sporeToAdd) {
+        mySpores.Add(sporeToAdd);
         countText.text = mySpores.Count.ToString();
     }
 
-    public void AcceptIncomingSpore(Spore incomingSpore) {
-        if (mySpores.Count > 0) {
-            var finalSporeIndex = mySpores.Count - 1;
-            var defendingSpore = mySpores[finalSporeIndex];
-            mySpores.RemoveAt(finalSporeIndex);
-            incomingSpore.AttackOtherSpore(defendingSpore);
-        } else {
+    void AcceptIncomingSpore(Spore incomingSpore, PlanetSettings.Allegiance sourceAllegiance) {
+        if (myAllegiance.myAllegiance == sourceAllegiance || 
+            myAllegiance.myAllegiance == PlanetSettings.Allegiance.unclaimed) {
             incomingSpore.ChangeOwnership(this);
-            mySpores.Add(incomingSpore);
-        }
+            AddSpore(incomingSpore);
+            if (myAllegiance.myAllegiance == PlanetSettings.Allegiance.unclaimed)
+                myAllegiance.ChangeAllegiance(sourceAllegiance);
+        } else {
+            if (mySpores.Count > 0) {
+                var finalSporeIndex = mySpores.Count - 1;
+                var defendingSpore = mySpores[finalSporeIndex];
+                mySpores.RemoveAt(finalSporeIndex);
+                incomingSpore.AttackOtherSpore(defendingSpore);
+            } else
+                myAllegiance.ChangeAllegiance(sourceAllegiance);
+        } 
     }
     
     void Update() {
         for (var i = 0; i < mySpores.Count; i++) {
-         //   Debug.DrawRay(transform.position, mySpores[i].transform.position - transform.position, Color.cyan);
+            Debug.DrawRay(transform.position, mySpores[i].transform.position - transform.position, Color.cyan);
         }
     }
 
     public void TransferSpores(PlanetarySporeManager destinationSporeManager) {
-        for (var i = mySpores.Count - 1; i >= mySpores.Count / 2; i--)
-            destinationSporeManager.AcceptIncomingSpore(mySpores[i]);
+        var countToTransfer = mySpores.Count / 2;
+        for (var i = mySpores.Count - 1; i >= countToTransfer; i--) {
+            destinationSporeManager.AcceptIncomingSpore(mySpores[i], myAllegiance.myAllegiance);
+            mySpores.RemoveAt(i);
+        }
     }
 }
